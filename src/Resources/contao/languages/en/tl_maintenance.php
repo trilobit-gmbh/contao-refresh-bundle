@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 
 $GLOBALS['TL_LANG']['tl_maintenance']['refreshtarget']['headline'] = 'Refresh';
-$GLOBALS['TL_LANG']['tl_maintenance']['refreshtarget']['description'] = 'Here you can update the content of the selected target system. The Contao Manager is required (<a href="https://contao.org/de/download.html"><u>https://contao.org/en/download.html</u></a>).';
+$GLOBALS['TL_LANG']['tl_maintenance']['refreshtarget']['description'] = 'Here you can update the content of the selected target system. The Contao Manager is required (<a href="https://contao.org/en/download.html"><u>https://contao.org/en/download.html</u></a>).';
 
 $GLOBALS['TL_LANG']['tl_maintenance']['refreshtarget']['maintenance'] = 'The refresh is not available in maintenance mode.';
 $GLOBALS['TL_LANG']['tl_maintenance']['refreshtarget']['active'] = 'A refresh process is already running. Please try again later.';
