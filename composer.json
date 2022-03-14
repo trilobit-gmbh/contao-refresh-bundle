@@ -1,0 +1,34 @@
+{
+    "name": "trilobit-gmbh/contao-refresh-bundle",
+    "description": "Contao 4 refresh (e.g. dev -> stage, stage -> live, ...) bundle",
+    "type": "contao-bundle",
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "trilobit GmbH",
+            "homepage": "https://github.com/trilobit-gmbh"
+        }
+    ],
+    "require": {
+        "php": "^7.3 || ^8.0",
+        "contao/core-bundle": "~4.9"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.11",
+        "friendsofphp/php-cs-fixer": "^3.0"
+    },
+    "conflict": {
+        "contao/manager-plugin": "<2.0 || >=3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Trilobit\\RefreshBundle\\": "src/"
+        }
+    },
+    "extra": {
+        "contao-manager-plugin": "Trilobit\\RefreshBundle\\ContaoManager\\Plugin",
+        "symfony": {
+            "require": "3.4.* || 4.4.* || ^5.2"
+        }
+    }
+}

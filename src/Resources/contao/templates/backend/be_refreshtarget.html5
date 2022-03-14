@@ -1,0 +1,63 @@
+<div id="tl_refreshtarget" class="maintenance_<?= $this->isActive ? 'active' : 'inactive'; ?><?= $this->isMaintenance ? ' is_maintenance' : ''; ?>">
+    <style>
+        #tl_refreshtarget .tl_tbox > div {
+            max-width: 562px;
+        }
+        #tl_refreshtarget .tl_tbox.description {
+            padding-bottom: 0;
+        }
+        #tl_refreshtarget .tl_tbox.description p:last-child {
+            margin-bottom: 0;
+        }
+        #tl_refreshtarget.is_maintenance .tl_message > p {
+            padding-top: 0;
+            padding-bottom: 0;
+            background-color: transparent;
+            background-position-y: center;
+        }
+    </style>
+
+    <h2 class="sub_headline sub_headline_index"><?= $this->headline; ?></h2>
+
+    <?php if ($this->message) { ?>
+        <div class="tl_message">
+            <?= $this->message; ?>
+        </div>
+    <?php } ?>
+
+    <?php if ($this->isMaintenance) { ?>
+        <div class="tl_message">
+            <p class="tl_info"><?= $this->maintenance; ?></p>
+        </div>
+    <?php } elseif ($this->isActive) { ?>
+        <div class="tl_message">
+            <p class="tl_info"><?= $this->active; ?></p>
+            <p class="tl_info">isActive</p>
+        </div>
+    <?php } else { ?>
+        <div class="tl_tbox description">
+            <div>
+                <p><?= $this->description; ?></p>
+            </div>
+        </div>
+        <?php if (null !== $this->widget): ?>
+            <form class="tl_form" method="post" onsubmit="return window.confirm(<?= $this->confirm; ?>);">
+                <div class="tl_formbody_edit">
+                    <input type="hidden" name="FORM_SUBMIT" value="tl_refreshtarget">
+                    <input type="hidden" name="REQUEST_TOKEN" value="<?= REQUEST_TOKEN; ?>">
+                    <div class="tl_tbox">
+                        <div>
+                            <?= $this->widget->parse(); ?>
+                            <?php if (!$this->widget->hasErrors()) { ?>
+                                <p class="tl_help tl_tip"><?= $this->info; ?></p>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl_submit_container">
+                    <button type="submit" class="tl_submit"><?= $this->submit; ?></button>
+                </div>
+            </form>
+        <?php endif; ?>
+    <?php } ?>
+</div>
