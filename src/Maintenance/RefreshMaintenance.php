@@ -96,9 +96,7 @@ class RefreshMaintenance extends Backend implements \executable
 
             $process->wait();
 
-            $successful = $process->isSuccessful();
-
-            $queue[] = '→ '.$description.' [#'.++$count.' / '. 1 !== $successful ? $successful : 'OK' .']';
+            $queue[] = '→ '.$description.' [#'.++$count.']';
 
             $logger->log(
                 LogLevel::INFO,
