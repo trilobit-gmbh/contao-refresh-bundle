@@ -82,26 +82,23 @@ class RefreshMaintenance extends Backend implements \executable
 
         $queue = [Input::post('environments')];
 
+        echo '<pre>';
+
         foreach ($environment['steps'] as $count => $step) {
             $description = array_key_first($step);
 
-            $cmd = $step[$description];
+            $shellCommandLine = $step[$description];
+            $shellCommandLine = $this->replaceSimpleTokens($shellCommandLine, $environment, $config);
 
-            $description = $description;
+            $process = new Process([$shellCommandLine]);
+            $process = Process::fromShellCommandline($shellCommandLine);
+            $process->run();
 
-            $cmd = $this->replaceSimpleTokens($cmd, $environment, $config);
-
-            $process = new Process($cmd);
-            $process->start();
-
-            while ($process->isRunning()) {
-                //wait ...
-            }
+            $process->wait();
 
             $successful = $process->isSuccessful();
-            $status = $process->getStatus();
 
-            $queue[] = '→ <span title="'.$cmd.'">'.$description.'</span> ['.++$count.'/'.$status.'/'.$successful.']';
+            $queue[] = '→ '.$description.' [#'.++$count.' / '. 1 !== $successful ? $successful : 'OK' .']';
 
             $logger->log(
                 LogLevel::INFO,
