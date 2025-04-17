@@ -1,5 +1,15 @@
 services:
     _instanceof:
-        Contao\CoreBundle\Framework\FrameworkAwareInterface:
+        Symfony\Component\DependencyInjection\ContainerAwareInterface:
             calls:
-                - [setFramework, ['@contao.framework']]
+                - ['setContainer', ['@service_container']]
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Trilobit\RefreshBundle\Maintenance\RefreshMaintenance:
+        public: true
+        arguments:
+            - '@contao.framework'
+            - '@logger'

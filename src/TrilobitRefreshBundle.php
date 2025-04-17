@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Trilobit\RefreshBundle;
 
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Trilobit\RefreshBundle\DependencyInjection\RefreshExtension;
 
@@ -21,7 +22,7 @@ use Trilobit\RefreshBundle\DependencyInjection\RefreshExtension;
  */
 class TrilobitRefreshBundle extends Bundle
 {
-    public function getContainerExtension()
+    public function getContainerExtension(): ?ExtensionInterface
     {
         return new RefreshExtension();
     }

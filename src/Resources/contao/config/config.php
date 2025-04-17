@@ -11,4 +11,8 @@ declare(strict_types=1);
 
 use Trilobit\RefreshBundle\Maintenance\RefreshMaintenance;
 
-$GLOBALS['TL_MAINTENANCE'][] = RefreshMaintenance::class;
+$GLOBALS['TL_MAINTENANCE'] = array_merge(
+    [RefreshMaintenance::class],
+    $GLOBALS['TL_MAINTENANCE']
+);
+

@@ -19,7 +19,7 @@ class Configuration implements ConfigurationInterface
      *
      * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder The tree builder
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('trilobit_refresh');
 
@@ -38,17 +38,5 @@ class Configuration implements ConfigurationInterface
         ;
 
         return $treeBuilder;
-
-        /*
-        $treeBuilder = new TreeBuilder('trilobit');
-        $treeBuilder
-            ->getRootNode()
-                ->children()
-                    ->variableNode('refresh')
-                ->end()
-        ;
-
-        return $treeBuilder;
-        */
     }
 }
