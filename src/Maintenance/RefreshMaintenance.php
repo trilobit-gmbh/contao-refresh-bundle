@@ -6,7 +6,6 @@ declare(strict_types=1);
  * @copyright  trilobit GmbH
  * @author     trilobit GmbH <https://github.com/trilobit-gmbh>
  * @license    LGPL-3.0-or-later
- * @link       http://github.com/trilobit-gmbh/contao-refresh-bundle
  */
 
 namespace Trilobit\RefreshBundle\Maintenance;
@@ -37,7 +36,7 @@ class RefreshMaintenance implements MaintenanceModuleInterface
 
     public function __construct(
         ContaoFramework $framework,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ) {
         $this->logger = $logger;
         $this->framework = $framework;
@@ -107,14 +106,14 @@ class RefreshMaintenance implements MaintenanceModuleInterface
 
         $queue = [$this->taskWidget->value];
 
-        $steps = count($this->microtask['environments'][$this->taskWidget->value]['steps']);
-        $length = strlen((string) $steps);
+        $steps = \count($this->microtask['environments'][$this->taskWidget->value]['steps']);
+        $length = \strlen((string) $steps);
         $date = Date::parse('Y-m-d');
 
         foreach ($this->microtask['environments'][$this->taskWidget->value]['steps'] as $key => $value) {
             $description = array_key_first($value);
 
-            //$process = new Process([$shellCommandLine]);
+            // $process = new Process([$shellCommandLine]);
             $process = Process::fromShellCommandline($this->replaceSimpleTokens($value[$description]));
             $process->run();
 
@@ -122,18 +121,18 @@ class RefreshMaintenance implements MaintenanceModuleInterface
                 $this->rootDir.'/var/logs/refreshtarget-'.$this->taskWidget->value.'-'.$date.'.log',
                 '['.Date::parse('Y-m-d').'T'.Date::parse('H:i:s').'.000000+00:00]'
                 .' request.INFO: '.$description.'.'
-                .' {"response":"'.trim(preg_replace('/\s+/', ' ', str_replace(["\r", "\n", "", '\\'], [' ', ' ', '', '\\'], $process->getOutput()))).'"}'
+                .' {"response":"'.trim(preg_replace('/\s+/', ' ', str_replace(["\r", "\n", '', '\\'], [' ', ' ', '', '\\'], $process->getOutput()))).'"}'
                 ."\n",
-                FILE_APPEND
+                \FILE_APPEND
             );
 
             $process->wait();
 
-            $queue[] = '<span class="small">#'.sprintf('%0'.$length.'d', ++$key).'</span> → '.$description;
+            $queue[] = '<span class="small">#'.\sprintf('%0'.$length.'d', ++$key).'</span> → '.$description;
 
             $this->logger->log(
                 LogLevel::INFO,
-                $this->taskWidget->value.': ('.sprintf('%0'.$length.'d', $key).'/'.$steps.') '.$description,
+                $this->taskWidget->value.': ('.\sprintf('%0'.$length.'d', $key).'/'.$steps.') '.$description,
                 ['contao' => new ContaoContext(__METHOD__, 'REFRESH_TARGET')]
             );
         }
@@ -208,19 +207,16 @@ class RefreshMaintenance implements MaintenanceModuleInterface
                 }
 
                 $result = array_map(
-                    (static function($item) use ($db_name) {
+                    static function($item) use ($db_name) {
                         return '--ignore-table='.$db_name.'.'.$item;
-                    }),
+                    },
                     $environment['exclude']['database']['tables']
                 );
                 $replace = implode(' ', $result);
-
             } elseif (1 === preg_match('/^##(source|target)\.(.*?)##$/', $search, $match)) {
                 $replace = $environment[$match[1]][$match[2]];
-
             } elseif (!empty($environment[$key])) {
                 $replace = $environment[$key];
-
             } else {
                 $replace = $this->microtask[$key];
             }
