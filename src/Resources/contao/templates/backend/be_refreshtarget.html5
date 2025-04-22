@@ -15,6 +15,22 @@
             background-color: transparent;
             background-position-y: center;
         }
+        #tl_refreshtarget .tl_message .small {
+            font-size: smaller;
+            font-family: ui-monospace;
+            /*
+            margin: 0 .5rem .125rem 0;
+            border-radius: 50%;
+            display: inline-grid;
+            width: 1.25rem;
+            height: 1.25rem;
+            align-items: center;
+            text-align: center;
+            background-color: var(--body-bg);
+            color: var(--blue);
+            border: 1px solid var(--content-border);
+            */
+        }
     </style>
 
     <h2 class="sub_headline sub_headline_index"><?= $this->headline; ?></h2>
@@ -40,11 +56,13 @@
                 <p><?= $this->description; ?></p>
             </div>
         </div>
-        <?php if (null !== $this->widget): ?>
-            <form class="tl_form" method="post" onsubmit="return window.confirm(<?= $this->confirm; ?>);">
+        <?php if (null !== $this->widget) { ?>
+            <form class="tl_form" method="get" onsubmit="return window.confirm(<?= $this->confirm; ?>);">
                 <div class="tl_formbody_edit">
-                    <input type="hidden" name="FORM_SUBMIT" value="tl_refreshtarget">
-                    <input type="hidden" name="REQUEST_TOKEN" value="<?= REQUEST_TOKEN; ?>">
+                    <input type="hidden" name="do" value="maintenance">
+                    <input type="hidden" name="act" value="refreshtarget">
+                    <input type="hidden" name="rt" value="<?= $this->requestToken; ?>">
+                    <input type="hidden" name="REQUEST_TOKEN" value="<?= $this->requestToken; ?>">
                     <div class="tl_tbox">
                         <div>
                             <?= $this->widget->parse(); ?>
@@ -58,6 +76,6 @@
                     <button type="submit" class="tl_submit"><?= $this->submit; ?></button>
                 </div>
             </form>
-        <?php endif; ?>
+        <?php } ?>
     <?php } ?>
 </div>

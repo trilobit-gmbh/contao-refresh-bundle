@@ -6,7 +6,6 @@ declare(strict_types=1);
  * @copyright  trilobit GmbH
  * @author     trilobit GmbH <https://github.com/trilobit-gmbh>
  * @license    LGPL-3.0-or-later
- * @link       http://github.com/trilobit-gmbh/contao-refresh-bundle
  */
 
 namespace Trilobit\RefreshBundle\ContaoManager;
@@ -25,9 +24,6 @@ use Trilobit\RefreshBundle\TrilobitRefreshBundle;
  */
 class Plugin implements BundlePluginInterface
 {
-    /**
-     * {@inheritDoc}
-     */
     public function getBundles(ParserInterface $parser)
     {
         return [
@@ -39,8 +35,6 @@ class Plugin implements BundlePluginInterface
     }
 
     /**
-     * {@inheritDoc}
-     *
      * @throws \Exception
      */
     public function registerContainerConfiguration(LoaderInterface $loader, array $managerConfig): void

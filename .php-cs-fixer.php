@@ -4,7 +4,6 @@ $header = <<<EOF
 @copyright  trilobit GmbH
 @author     trilobit GmbH <https://github.com/trilobit-gmbh>
 @license    LGPL-3.0-or-later
-@link       http://github.com/trilobit-gmbh/contao-refresh-bundle
 EOF;
 
 $config = new \PhpCsFixer\Config();
@@ -30,7 +29,7 @@ return $config
         'header_comment' => [
             'header' => $header,
             'comment_type' => 'comment',
-            //-//'location' => 'after_declare_strict',
+            'location' => 'after_declare_strict',
         ],
         'comment_to_phpdoc' => [
             'ignored_tags' => [
@@ -52,7 +51,7 @@ return $config
         'native_function_invocation' => [
             'include' => ['@compiler_optimized'],
             'scope' => 'namespaced',
-            //-//'strict' => true,
+            'strict' => true,
         ],
         'no_useless_sprintf' => true,
         'nullable_type_declaration_for_default_null_value' => true,
@@ -91,9 +90,9 @@ return $config
             'strategy' => 'new_line_for_chained_calls',
         ],
         // Strict
-        //-//'declare_strict_types' => true,
-        //-//'strict_comparison' => true,
-        //-//'strict_param' => true,
+        'declare_strict_types' => true,
+        'strict_comparison' => true,
+        'strict_param' => true,
         // String Notation
         'heredoc_to_nowdoc' => true,
         'single_quote' => true,
@@ -103,7 +102,7 @@ return $config
         PhpCsFixer\Finder::create()
             ->exclude('trilobit')
             ->in([
-                __DIR__.'/src',
+                __DIR__.'/src'
             ])
     )
     ;

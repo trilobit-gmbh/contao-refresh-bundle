@@ -6,11 +6,11 @@ declare(strict_types=1);
  * @copyright  trilobit GmbH
  * @author     trilobit GmbH <https://github.com/trilobit-gmbh>
  * @license    LGPL-3.0-or-later
- * @link       http://github.com/trilobit-gmbh/contao-refresh-bundle
  */
 
 namespace Trilobit\RefreshBundle;
 
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Trilobit\RefreshBundle\DependencyInjection\RefreshExtension;
 
@@ -21,7 +21,7 @@ use Trilobit\RefreshBundle\DependencyInjection\RefreshExtension;
  */
 class TrilobitRefreshBundle extends Bundle
 {
-    public function getContainerExtension()
+    public function getContainerExtension(): ?ExtensionInterface
     {
         return new RefreshExtension();
     }
