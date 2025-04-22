@@ -1,9 +1,9 @@
 Refresh Bundle
 ==============
 
-This is a bundle for [Contao CMS] (version 4.9.x).
+This is a bundle for [Contao CMS] (version 4.13.x, 5.3.x).
 
-Dies ist ein Bundle für [Contao CMS] (Version 4.9.x).
+Dies ist ein Bundle für [Contao CMS] (Version 4.13.x, 5.3.x).
 
 Installation
 ------------
@@ -13,8 +13,8 @@ Install the extension via composer: [trilobit-gmbh/contao-refresh-bundle](https:
 Kompatibilität / Getestet / Compatibility / Tested
 --------------------------------------------------
 
-- Contao version ~4.9
 - Contao version ~4.13
+- Contao version ~5.3
 
 Configuration
 -------------
